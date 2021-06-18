@@ -1,0 +1,28 @@
+% !TEX TS-program = lualatex
+\documentclass[preview,border=10pt]{standalone}
+%\usepackage{varwidth}
+%\usepackage[a4paper,margin=2cm]{geometry}
+
+%\usepackage{inconsolata}
+\usepackage{fontspec}
+\setmonofont{dejavusans} % choose a suitable monospaced font
+
+\usepackage{fancyvrb}
+\usepackage{fvextra}
+\usepackage{xcolor}
+
+\begin{document}
+\begin{minipage}{20cm}
+\begin{Verbatim}[commandchars=\\\{\}, breaklines=true, breakanywhere=true]
+\{
+	\textcolor{red}{"question"}: "Who sang the song Mirrors?",
+	\textcolor{red}{"positive context"}: "\textbackslash"Mirrors\textbackslash", also titled \textbackslash"Mirrors (I Don't Wanna Lose You Now)\textbackslash", is a song recorded by American singer-songwriter \textcolor{blue}{Justin Timberlake} for his third studio album, The 20/20 Experience (2013). First conceived in 2009, the track was inspired by his relationship with Jessica Biel and the marriage of his grandparents.",
+	\textcolor{red}{"negative contexts"}: [
+		"The World's Billionaires is an annual ranking by documented net worth of the wealthiest billionaires in the world, compiled and published in March annually by the American business magazine Forbes. The list was first published in March 1987",
+		"Harry Potter is a series of seven fantasy novels written by British author J. K. Rowling. The novels chronicle the lives of a young wizard, Harry Potter, and his friends Hermione Granger and Ron Weasley, all of whom are students at Hogwarts School of Witchcraft and Wizardry.",
+		.....
+	]
+\}
+\end{Verbatim}
+\end{minipage}
+\end{document}

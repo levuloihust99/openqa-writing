@@ -1,0 +1,32 @@
+% !TEX TS-program = lualatex
+\documentclass[preview,border=10pt]{standalone}
+%\usepackage{varwidth}
+%\usepackage[a4paper,margin=2cm]{geometry}
+
+%\usepackage{inconsolata}
+\usepackage{fontspec}
+\setmonofont{dejavusans} % choose a suitable monospaced font
+
+\usepackage{fancyvrb}
+\usepackage{fvextra}
+\usepackage{xcolor}
+
+\begin{document}
+%\begin{minipage}{20cm}
+\begin{Verbatim}[commandchars=\\\{\}, breaklines=true, breakanywhere=true]
+[
+	\{
+		"question": "....",
+		"answers": ["...", "...", "..."],
+		"positive_ctxs": [\{
+			"title": "...",
+			"text": "..."
+		\}],
+		"negative_ctxs": ["..."],
+		"hard_negative_ctxs": ["..."]
+	\},
+	...
+]
+\end{Verbatim}
+%\end{minipage}
+\end{document}

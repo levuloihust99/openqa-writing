@@ -1,0 +1,11 @@
+\documentclass[border=10pt]{standalone}
+\usepackage{pgf,tikz,pgfplots}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows.meta}
+\begin{document}
+	\begin{tikzpicture}[every node/.style={fill=white, font=\sffamily}, align=center]
+		\node (uncomplete) [font=\fontsize{14pt}{\baselineskip}\selectfont\sffamily] {I'm [MASK]. I want to eat};
+		\node (complete) [font=\fontsize{14pt}{\baselineskip}\selectfont\sffamily, below=.7cm of uncomplete] {I'm \fbox{\textcolor{red}{hungry}}. I want to eat};
+		\draw[->, line width=1.pt] (uncomplete) -- (complete);
+	\end{tikzpicture}
+\end{document}

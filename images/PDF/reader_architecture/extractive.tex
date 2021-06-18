@@ -1,0 +1,46 @@
+\documentclass[border=10pt]{standalone}
+\usepackage{pgf,tikz,pgfplots}
+\usetikzlibrary{quotes, angles}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{calc, shapes, automata, fit}
+\tikzset{%
+	% Specifications for style of nodes:
+	base/.style = {rectangle, rounded corners, draw=black,
+		%		minimum width=4cm, minimum height=1cm,
+		inner sep=15pt,
+		text centered, font=\sffamily}, 
+	activityStarts/.style = {base, fill=blue!30},
+	startstop/.style = {base, fill=red!30},
+	activityRuns/.style = {base, fill=red!30},
+	process/.style = {base, minimum width=2.5cm, fill=orange!15,
+		font=\ttfamily},
+	context/.style = {base, inner sep=5pt, align=justify, fill=blue!30}
+}
+\begin{document}
+\begin{tikzpicture}[every node/.style={font=\sffamily}, align=center]
+	\node (ctxs1) [context] {context 1};
+	\node (ctxs2) [context, below=5pt of ctxs1] {context 2};
+	\node (dots) [below=5pt of ctxs2] {.......};
+	\node (ctxsk) [context, below=5pt of dots] {context k};
+	\path let
+		\p1 = (ctxs1.north),
+		\p2 = (ctxs1.west)
+	in
+		coordinate (northCtxs) at (\x2, \y1);
+	\node (topK) [anchor=west, shift={(-1.5cm, 0.4cm)},font=\fontsize{12pt}{\baselineskip}\selectfont\color{black!50}\sffamily] at (northCtxs) {Top k retrieval contexts};
+	\node (topKblock) [draw=black!50, fit={(ctxs1) (ctxs2) (dots) (ctxsk) (topK)}] {};
+	\node (question) [rounded corners, fill=red!20, draw=black, below=1cm of topKblock, inner sep=5pt] {question};
+	\node (extrReader) [yshift=-2cm, right=2cm of topKblock, draw=black, rounded corners, fill=green!30, inner xsep=10pt, inner ysep=15pt, font=\fontsize{14pt}{\baselineskip}\selectfont\sffamily] {Extractive \\ Reader};
+	\draw[->] (ctxs1) -- ([yshift=20pt]extrReader.west);
+	\draw[->] (ctxs2) -- ([yshift=10pt]extrReader.west);
+	\draw[->] (ctxsk) -- (extrReader.west);
+	\draw[->] (question) -- ([yshift=-10pt]extrReader.west);
+	\node (bestCtx) [draw=black, right=1.5cm of extrReader, yshift=1.5cm, fill=orange!30, rounded corners, inner sep=5pt] {Best context};
+	\node (startToken) [draw=black, right=1.5cm of extrReader, fill=yellow!30, rounded corners, inner sep=5pt] {start token};
+	\node (endToken) [draw=black, right=1.5cm of extrReader, yshift=-1.5cm, fill=yellow!30, rounded corners, inner sep=5pt] {start token};
+	\draw[->] ([yshift=10pt]extrReader.east) -- (bestCtx.west);
+	\draw[->] (extrReader.east) -- (startToken.west);
+	\draw[->] ([yshift=-10pt]extrReader.east) -- (endToken.west);
+\end{tikzpicture}
+\end{document}
