@@ -1,0 +1,23 @@
+\documentclass[border=10pt]{standalone}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{pgf,tikz,pgfplots}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows.meta}
+\begin{document}
+\begin{tikzpicture}[every node/.style={fill=white, font=\sffamily}, align=center]
+\node (wordEmbedding) [font=\fontsize{24pt}{\baselineskip}\selectfont\sffamily\bfseries] {\textcolor{blue}{Word embedding}};
+\node (ner) [below right=1cm and 0.cm of wordEmbedding, font=\fontsize{18pt}{\baselineskip}\selectfont\sffamily\bfseries] {\textcolor{red}{Named Entity Recognition}};
+\node (depParsing) [below left=0.5cm and 0.8cm of wordEmbedding, font=\fontsize{22pt}{\baselineskip}\selectfont\sffamily\bfseries] {\textcolor{brown}{Dependency Parsing}};
+\node (qa) [below right=0.5cm and 0.5cm of depParsing.south, font=\fontsize{20pt}{\baselineskip}\selectfont\sffamily\bfseries] {\textcolor{orange}{Question Answering}};
+\node (mrc) [above left=0.75cm and 0.3cm of wordEmbedding.north, font=\fontsize{20pt}{\baselineskip}\selectfont\sffamily\bfseries] {\textcolor{blue!50}{Machine Reading Comprehension}};
+\node (sum) [above right=0.6 and 0.3cm of wordEmbedding.north, font=\fontsize{18pt}{\baselineskip}\selectfont\sffamily\bfseries] {\textcolor{red!50}{Summarization}};
+\node (lm) [below right=1.cm and 1.cm of qa.south, font=\fontsize{22pt}{\baselineskip}\selectfont\sffamily\bfseries] {\textcolor{red!50}{Language Modeling}};
+\node (nmt) [below left=.5cm and 2.5cm of qa.south, font=\fontsize{24pt}{\baselineskip}\selectfont\sffamily\bfseries] {\textcolor{ForestGreen}{Machine Translation}};
+\node (sentAnal) [below left=.5cm and 2.5cm of lm.south, font=\fontsize{20pt}{\baselineskip}\selectfont\sffamily\bfseries] {\textcolor{BlueViolet}{Sentiment Analysis}};
+\node (sentEmb) [below right=2.cm and .5cm of lm.south, font=\fontsize{22pt}{\baselineskip}\selectfont\sffamily\bfseries] {\textcolor{Bittersweet}{Sentence Embedding}};
+\node (diag) [below left=0.5cm and -0.5cm of sentAnal.south, font=\fontsize{24pt}{\baselineskip}\selectfont\sffamily\bfseries] {\textcolor{ProcessBlue}{Dialogue Management}};
+\node (pos) [above right=0.5cm and -0.5cm of lm.north, font=\fontsize{21pt}{\baselineskip}\selectfont\sffamily\bfseries] {\textcolor{Green}{Part-of-speec Tagging}};
+\node (inform) [below right=1.5cm and -0.5cm of diag.north, font=\fontsize{25pt}{\baselineskip}\selectfont\sffamily\bfseries] {\textcolor{Sepia}{Information retrieval}};
+\node (kwarg) [below right=1.5cm and -0.5cm of inform.north, font=\fontsize{21pt}{\baselineskip}\selectfont\sffamily\bfseries] {\textcolor{Dandelion}{Keyword Extraction}};
+\end{tikzpicture}
+\end{document}
