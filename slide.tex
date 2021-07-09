@@ -12,7 +12,7 @@
 \usepackage{changepage}
 \setbeamerfont{frametitle}{size=\large}
 \usepackage{caption}
-\captionsetup[figure]{labelformat=empty}
+\captionsetup{labelformat=empty}
 \usepackage{booktabs}
 \usepackage{array}
 \newcolumntype{P}{>{\centering\arraybackslash}p}
@@ -95,10 +95,17 @@
 \captionsenglish
 \dateUSenglish
 \author[Le Vu Loi]{
-	\begin{tabular}{ll}
-		\textit{Author} & Le Vu Loi - 20173240 \\
-		\textit{Supervisor} & Assoc. Prof. Pham Van Hai
-	\end{tabular}
+	\begin{center}
+		{\fontsize{14pt}{\baselineskip}\selectfont Le Vu Loi - 20173240} \\[10pt]
+		{\fontsize{12pt}{\baselineskip}\selectfont Talented class of Computer Science} \\[25pt]
+		\textbf{Supervisor}: Assoc. Prof. Pham Van Hai\\
+		Department of Information System
+	\end{center}
+%	\begin{tabular}{ll}
+%		Le Vu Loi - 20173240 \\[]
+%		
+%		\textit{Supervisor} & Assoc. Prof. Pham Van Hai
+%	\end{tabular}
 }
 \title[]{\bfseries\fontsize{14}{\baselineskip}\selectfont BACHELOR THESIS\vspace{5pt}}
 \subtitle{The proposed Dual Encoder model for Open-domain
@@ -127,36 +134,40 @@
 %====================================
 \section{Introduction}
 \subsection{Overview}
-%\begin{frame}
-%\frametitle{NLP tasks}
-%\hspace*{-15pt}
-%\includegraphics[scale=.45]{images/PDF/nlptask/nlptask.pdf}
-%\end{frame}
-%====================================
 \begin{frame}
 \frametitle{Open-domain question answering}
-\textbf{Open-domain question answering is at medium level of difficulty among various NLP tasks.} \\[10pt]
-\begin{itemize}
-\item Word embedding
-\item Sentence embedding
-\item Language Modeling \\
-.....
-\item Question Answering
-\item \textcolor{blue}{\bfseries Open-domain question answering}\\
-.....
-\item Text Summarization
-\item Dialogue Management
-\end{itemize}
+\hspace*{-15pt}
+\includegraphics[scale=.45]{images/PDF/nlptask/nlptask.pdf}
 \end{frame}
+%====================================
+%\begin{frame}
+%\frametitle{Open-domain question answering}
+%\textbf{Open-domain question answering is at medium level of difficulty among various NLP tasks.} \\[10pt]
+%\begin{itemize}
+%\item Word embedding
+%\item Sentence embedding
+%\item Language Modeling \\
+%.....
+%\item Question Answering
+%\item \textcolor{blue}{\bfseries Open-domain question answering}\\
+%.....
+%\item Text Summarization
+%\item Dialogue Management
+%\end{itemize}
+%\end{frame}
 %====================================
 \begin{frame}
 \frametitle{Open-domain question answering}
 %\vspace{-.5cm}
 \begin{itemize}
-	\item Combination of \textbf{Information Retrieval} and \textbf{Machine Reading Comprehension}
+	\item Combination of \textbf{retriever} (Information Retrieval) and \textbf{reader} (Machine Reading Comprehension)
+	\begin{itemize}
+		\item "Skim through" a large data source to find a subset of relevant documents.
+		\item "Swallow" each document to find the exact answer(s).
+	\end{itemize}
 \end{itemize}
-\hspace*{-15pt}
-\includegraphics[scale=.68]{images/PDF/overall_arch/architecture.pdf}
+%\hspace*{-15pt}
+%\includegraphics[scale=.68]{images/PDF/overall_arch/architecture.pdf}
 \end{frame}
 %====================================
 \subsection{Problem formulation}
@@ -177,10 +188,13 @@
 	\item \textbf{Constraints}
 	\begin{itemize}
 		\item The system answers only factoid question.
-		\item Factoid question means that the question is about a fact and often can be answered by a short phrase. Yes/no question, multiple-choice question and reasoning question are not factoid. \\[5pt]
-		- \textit{Factoid question}: What is the capital of Vietnam? \\
-		- \textit{Reasoning question}: If 3 cats can catch 3 mice in 3 minutes, how many mices can 6 cats catch in 6 minutes?
+%		\item Factoid question means that the question is about a fact and often can be answered by a short phrase. Yes/no question, multiple-choice question and reasoning question are not factoid. \\[5pt]
+%		- \textit{Factoid question}: What is the capital of Vietnam? \\
+%		- \textit{Reasoning question}: If 3 cats can catch 3 mice in 3 minutes, how many mices can 6 cats catch in 6 minutes?
 	\end{itemize}
+%\begin{figure}
+%	content...
+%\end{figure}
 \end{itemize}
 \end{adjustwidth}
 \end{frame}
@@ -199,19 +213,28 @@
 \begin{frame}
 \frametitle{Reading Wikipedia to answer open-domain questions}
 \begin{itemize}
-	\item Danqi Chen et. al \cite{mrc} proposed to solve open-domain question answering problem by reading Wikipedia to find answers.
-	\item Consist of a \textbf{document retriever} based on bigram hashing and TF-IDF matching and \textbf{machine reader} based on multi-layer Recurrent neural network.
-	\item This work promoted a large number of subsequent publications on Open-domain question answering problem.
+%	\item Danqi Chen et. al \cite{mrc} proposed to solve open-domain question answering problem by reading Wikipedia to find answers.
+%	\item Consist of a \textbf{document retriever} based on bigram hashing and TF-IDF matching and \textbf{machine reader} based on multi-layer Recurrent neural network.Chen et. al \cite{mrc} proposed to solve open-domain question answering problem by reading Wikipedia to find answers.
+%\item Consist of a \textbf{document retriever} based on bigram hashing and TF-IDF matching and \textbf{machine reader} based on multi-layer Recurrent neural network.
+%\item This work promoted a large number of subsequent publications on Open-domain question answering problem.
+%	\item This work promoted a large number of subsequent publications on Open-domain question answering problem.
+	\item \textbf{Retriever}: bigram hashing and TF-IDF matching
+	\item \textbf{Reader}: Multi-layer recurrent neural network
+	\item Potential improvements: using neural network to better capture documents' semantics
 \end{itemize}
 \end{frame}
 %====================================
 \begin{frame}
 \frametitle{Dense passage retrieval}
 \begin{itemize}
-	\item Karpukhin et. al \cite{dpr} proposed to use a dense retriever which based on Dual encoder architecture for retrieving documents in open-domain question answering system.
-	\item Dual encoder consists of a question encoder and a context encoder, which is used to encode question and document respectively into (a) vector space(s).
-	\item Similarity between a document and a question is computed by taking dot product of the encoded question and the encoded document.
-	\item Relevant documents to the input question are retrieved using this similarity.
+%	\item Karpukhin et. al \cite{dpr} proposed to use a dense retriever which based on Dual encoder architecture for retrieving documents in open-domain question answering system.
+%	\item Dual encoder consists of a question encoder and a context encoder, which is used to encode question and document respectively into (a) vector space(s).
+%	\item Similarity between a document and a question is computed by taking dot product of the encoded question and the encoded document.
+%	\item Relevant documents to the input question are retrieved using this similarity.
+	\item \textbf{Retriever}: Dual-encoder
+	\item \textbf{Reader}: Cross-encoder
+	\item Successfully use neural network to solve information retrieval.
+	\item Potential improvements: More challenging learning task for the system to gain deeper language understanding.
 \end{itemize}
 \end{frame}
 %====================================
@@ -351,19 +374,19 @@
 %\end{frame}
 %====================================
 \subsection{Stratified loss}
-\begin{frame}
-\frametitle{Existing approach: in-batch loss}
-\begin{adjustwidth}{-2em}{0em}
-\begin{itemize}
-	\item Karpukhin et. al \cite{dpr} proposed to use in-batch strategy and hard negative contexts to train dense retriever using negative log-likelihood loss defined in equation~\eqref{eq:01}. To be specific:
-	\begin{itemize}
-		\item In-batch strategy: training samples in a training batch use others' positive context as their negative contexts \\ $\rightarrow$ significantly reduce the number of documents needed to be fed into context encoder.
-		\item Hard negative contexts: normal negative contexts are non-relevant to the input question. Hard negative contexts are relevant to the input question but do not contain required information to answer that question. \\[5pt]
-		$\rightarrow$ challenge the model to learn better.
-	\end{itemize}
-\end{itemize}
-\end{adjustwidth}
-\end{frame}
+%\begin{frame}
+%\frametitle{Existing approach: in-batch loss}
+%\begin{adjustwidth}{-2em}{0em}
+%\begin{itemize}
+%	\item Karpukhin et. al \cite{dpr} proposed to use in-batch strategy and hard negative contexts to train dense retriever using negative log-likelihood loss defined in equation~\eqref{eq:01}. To be specific:
+%	\begin{itemize}
+%		\item In-batch strategy: training samples in a training batch use others' positive context as their negative contexts \\ $\rightarrow$ significantly reduce the number of documents needed to be fed into context encoder.
+%		\item Hard negative contexts: normal negative contexts are non-relevant to the input question. Hard negative contexts are relevant to the input question but do not contain required information to answer that question. \\[5pt]
+%		$\rightarrow$ challenge the model to learn better.
+%	\end{itemize}
+%\end{itemize}
+%\end{adjustwidth}
+%\end{frame}
 %====================================
 \begin{frame}
 \frametitle{Proposed method: stratified loss for training dual encoder}
@@ -426,16 +449,16 @@
 \includegraphics[scale=.25]{images/annotate.png}
 \end{frame}
 %====================================
-\subsection{Pretrained model}
-\begin{frame}
-	\frametitle{Pretrained model}
-	\begin{adjustwidth}{0em}{5em}
-	\begin{itemize}
-		\item Vietnamese open-domain question answering for COVID-19 topic was trained from the pretrained language model {\tt NlpHUST/vibert4news-base-cased} pulling from \href{https://huggingface.co/}{\tt huggingface}
-		\item Another well-known pretrained language model for Vietnamese is {\tt PhoBERT} of VinAI, which can also be found on \href{https://huggingface.co/}{\tt huggingface}
-	\end{itemize}
-	\end{adjustwidth}
-\end{frame}
+%\subsection{Pretrained model}
+%\begin{frame}
+%	\frametitle{Pretrained model}
+%	\begin{adjustwidth}{0em}{5em}
+%	\begin{itemize}
+%		\item Vietnamese open-domain question answering for COVID-19 topic was trained from the pretrained language model {\tt NlpHUST/vibert4news-base-cased} pulling from \href{https://huggingface.co/}{\tt huggingface}
+%		\item Another well-known pretrained language model for Vietnamese is {\tt PhoBERT} of VinAI, which can also be found on \href{https://huggingface.co/}{\tt huggingface}
+%	\end{itemize}
+%	\end{adjustwidth}
+%\end{frame}
 %====================================
 \section{Experimental results}
 \begin{frame}
@@ -529,33 +552,53 @@
 \end{adjustwidth}
 \end{frame}
 %=======================================
-\begin{frame}
-\frametitle{Results on extractive reader}
-\begin{itemize}
-	\item Experimental results on extractive reader are conducted using Google Natural Question.
-	\item Exact match score: 56.6\%
-\end{itemize}
-\end{frame}
+%\begin{frame}
+%\frametitle{Results on extractive reader}
+%\begin{itemize}
+%	\item Experimental results on extractive reader are conducted using Google Natural Question.
+%	\item Exact match score: 56.6\%
+%\end{itemize}
+%\end{frame}
 %=======================================
-\section{Web demo}
-\begin{frame}
-\frametitle{Question Answering about COVID-19}
-\begin{adjustwidth}{-2em}{-2em}
-\includegraphics[scale=.27]{images/VNQA.png}
-\end{adjustwidth}
-\end{frame}
+%\subsection{Web demo}
+%\begin{frame}
+%\frametitle{Question Answering about COVID-19}
+%\begin{adjustwidth}{-2em}{-2em}
+%\includegraphics[scale=.27]{images/VNQA.png}
+%\end{adjustwidth}
+%\end{frame}
 %=======================================
 \begin{frame}
-\frametitle{Question Answering about COVID-19}
+\frametitle{Demo: Question Answering about COVID-19}
 \begin{adjustwidth}{-2em}{-2em}
 	\includegraphics[scale=.27]{images/VNQA_2.png}
 \end{adjustwidth}
 \end{frame}
 %=======================================
-\begin{frame}[plain]
-%\frametitle{Question Answering about COVID-19}
+\section{Conclusion and future works}
+\begin{frame}
+\frametitle{Conclusion and future works}
 \begin{center}
-\textcolor{blue}{\fontsize{20pt}{\baselineskip}\selectfont\bfseries Thank you for your attention}
+	\begin{itemize}
+		\item Conclusion
+		\begin{itemize}
+			\item Propose to train retriever model with stratified loss
+			\item Conduct a case study for open-domain question answering system in Vietnamese language for COVID-19 topic
+			\item Use Cloud TPUs to train large retriever model in short time
+		\end{itemize}
+		\item Future works
+		\begin{itemize}
+			\item Study machine reading comprehension problem to improve reader component
+			\item Study the relationship between open-domain question answering and automatic knowledge graph construction
+		\end{itemize}
+	\end{itemize}
 \end{center}
+\end{frame}
+%=======================================
+\begin{frame}[plain]
+	%\frametitle{Question Answering about COVID-19}
+	\begin{center}
+		\textcolor{blue}{\fontsize{20pt}{\baselineskip}\selectfont\bfseries Thank you for your attention}
+	\end{center}
 \end{frame}
 \end{document}
